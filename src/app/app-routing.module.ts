@@ -1,15 +1,25 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    loadChildren: () => import('./main/main.module').then(m => m.MainModule),
+    data: {authGuardPipe: redirectUnauthorizedToLogin},
+    canActivate: [AuthGuard]
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'auth',
     pathMatch: 'full'
+  },
+  {
+    path: 'auth',
+    
+    loadChildren: () => import('./auth/auth-routing.module').then( m => m.AuthRoutingModule),
+
   },
 ];
 

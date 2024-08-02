@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "762703167589",
+    "project_id": "queenlaser-48877",
+    "storage_bucket": "queenlaser-48877.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762703167589:android:3262c197382952f987868c",
+        "android_client_info": {
+          "package_name": "com.pchaffey.queenlaser"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJaOoZSxOQUz8ERyafQzpGo-R1E2oKu34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,8 @@
 {
-  "name": "blank",
+  "name": "Queen Laser",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
