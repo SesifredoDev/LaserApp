@@ -1,4 +1,4 @@
-package com.pchaffey.queenlaser;
+package queenlaser.app;
 
 import com.getcapacitor.BridgeActivity;
 

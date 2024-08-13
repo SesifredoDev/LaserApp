@@ -6,8 +6,9 @@ import { DialogService } from '../dialog.service';
 import { BluetoothService } from '../bluetooth.service';
 import { GlobalErrorHandlerService } from '../global-error-handler.service';
 import { Router } from '@angular/router';
-import { BackgroundMode} from '@anuradev/capacitor-background-mode';
 import { Platform } from '@ionic/angular';
+import { ForegroundService } from '@capawesome-team/capacitor-android-foreground-service';
+
 
 
 
@@ -17,6 +18,8 @@ import { Platform } from '@ionic/angular';
 })
 export class GameService {
 
+  private readonly GH_URL =
+    'https://github.com/capawesome-team/capacitor-plugins';
   user: any;
 
   constructor(
@@ -26,24 +29,15 @@ export class GameService {
     private router: Router,
     private readonly ngZone: NgZone,
   ) {
-    this.setUp();
+    // this.setUp();
+    this.initializeBackgroundMode();
+    this.addListeners();
   }
 
-  initializeBackgroundMode() {
-    BackgroundMode.requestForegroundPermission()
-    BackgroundMode.checkNotificationsPermission().then(permission => {
-      if (permission.display !== 'granted') {
-        BackgroundMode.moveToBackground();
-        BackgroundMode.requestNotificationsPermission()
-      }
-    })
-    
-    BackgroundMode.enable();
-
-    BackgroundMode.addListener('appInBackground', ()=>{
-      this.setUp();
-    })
-    
+  async initializeBackgroundMode() {
+    await ForegroundService.requestManageOverlayPermission();
+    await ForegroundService.requestPermissions();
+    await ForegroundService.startForegroundService({body: 'Laser Tag', title: 'Laser Tag', id: 1222, smallIcon:''});
   }
 
   async setUp() {
@@ -100,6 +94,19 @@ export class GameService {
     this.socketService.socketConnect();
 
 
+  }
+
+
+  
+  private addListeners(): void {
+    ForegroundService.removeAllListeners().then(() => {
+      ForegroundService.addListener('buttonClicked', event => {
+        this.ngZone.run(() => {
+          ForegroundService.stopForegroundService();
+          ForegroundService.moveToForeground();
+        });
+      });
+    });
   }
 
 

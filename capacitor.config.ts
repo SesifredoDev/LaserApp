@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli'; 
 
 const config: CapacitorConfig = {
-  appId: 'com.pchaffey.queenlaser',
+  appId: 'queenlaser.app',
   appName: 'Queen Laser',
   webDir: 'www',
   server:{

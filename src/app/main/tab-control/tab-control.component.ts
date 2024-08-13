@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 
 import { IonicModule } from '@ionic/angular';
-import { FirebaseService, LocationService } from 'src/app/shared/services';
+import { BluetoothService, FirebaseService, GameService, LocationService, WorkerService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-tab-control',
@@ -10,10 +10,13 @@ import { FirebaseService, LocationService } from 'src/app/shared/services';
   styleUrls: ['./tab-control.component.scss']
 })
 export class TabControlComponent  implements OnInit {
-  constructor(private readonly ls: LocationService, private readonly firebaseService: FirebaseService) {
-  }
-  ngOnInit(): void {
-    this.ls.setUp();
+  constructor(
+    private readonly ls: LocationService,
+    private gameService: GameService,
+    private firebaseService: FirebaseService,
+    ) { }
+  ngOnInit() {
+    this.gameService.setUp();
   }
 
   logout(){

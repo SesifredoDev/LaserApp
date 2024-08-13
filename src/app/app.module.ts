@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from '@firebase/app';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
   
 
@@ -20,7 +21,7 @@ import { initializeApp } from '@firebase/app';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  providers: [BackgroundMode, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandlerService,

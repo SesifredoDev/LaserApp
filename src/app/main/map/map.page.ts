@@ -24,6 +24,10 @@ export class MapPage implements OnInit {
 
 
   constructor(private socket: WorkerService, private ls: LocationService) {
+    
+    this.initMap();
+    this.onMapReady();
+
   }
 
   private initMap() {
@@ -42,9 +46,6 @@ export class MapPage implements OnInit {
 
   ngOnInit() {
 
-
-    this.initMap();
-    this.onMapReady();
 
 
 
@@ -68,9 +69,8 @@ export class MapPage implements OnInit {
   onMapReady() {
     setTimeout(async () => {
 
-
-      let coords = await this.ls.getCurrentCoords();
-      this.centroid = [coords.coords.latitude, coords.coords.longitude];
+      const location = await this.ls.getLocation().then((data)=>{
+        this.centroid = [data.latitude, data.longitude];
 
 
       this.map = L.map('map', {
@@ -88,6 +88,8 @@ export class MapPage implements OnInit {
       this.map.setZoom(15);
       this.map.panTo(this.centroid)
 
+      });
+      
     }, 1000);
 
 

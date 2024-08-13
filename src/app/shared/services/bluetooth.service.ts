@@ -56,7 +56,7 @@ export class BluetoothService {
       this.connectToDevice(device);
     }
     if(this.devices.length == 0){
-        let deviceId = localStorage.getItem('bleDevicId');
+        let deviceId = localStorage.getItem('bleDeviceId');
         console.log('deviceId:', deviceId);
         if(deviceId){
           this.connectToDevice({deviceId: deviceId});
@@ -106,7 +106,7 @@ export class BluetoothService {
   async onConnect(device: BleDevice){
     localStorage.setItem('bleDeviceId', device.deviceId);
     this.isConnected.next(true);
-    BleClient.createBond(device.deviceId);
+    // BleClient.createBond(device.deviceId);
     await BleClient.startNotifications(
       device.deviceId,
       this.myService,

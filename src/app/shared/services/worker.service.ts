@@ -78,7 +78,7 @@ export class WorkerService {
       })
 
       this.socket.on("leadUpdate", (data:any) =>{
-        console.log("Leaderboard updated", data.leaderboard);
+        // console.log("Leaderboard updated", data.leaderboard)
         this.leaderboard.next(data.leaderboard);
         this.currentLeaderboard = data.leaderboard;
       })
@@ -99,9 +99,17 @@ export class WorkerService {
   }
 
   async sendGotShot(gunCode: string) {
-    let coordinates = await this.ls.getCurrentCoords();
-    this.socket.emit("gotshot", {data: {id:gunCode, location: coordinates.coords, time: coordinates.timestamp}})
-  }
+    const location = await this.ls.getLocation();
+      if (location) {
+        this.socket.emit("gotshot", {data: {id:gunCode, location: location, time: location.time}})
+      } else {
+        console.log('Could not retrieve location');
+      }
+    } catch (error : any) {
+      console.error('Error getting location:', error);
+    }
+    // let coordinates = await this.ls.getCurrentCoords();
+    // this.socket.emit("gotshot", {data: {id:gunCode, location: coordinates.coords, time: coordinates.timestamp}})
 
   getHeatMapValues(){
     this.socket.emit("getHeat", {});

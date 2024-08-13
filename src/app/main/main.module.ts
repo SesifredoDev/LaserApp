@@ -14,7 +14,7 @@ import { TabControlComponent } from './tab-control/tab-control.component';
 
 @NgModule({
   declarations: [
-    TabControlComponent
+    TabControlComponent,
   ],
   imports: [
     CommonModule,
