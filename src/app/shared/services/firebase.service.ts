@@ -30,8 +30,26 @@ export class FirebaseService {
     return this.firestore.collection("users").doc(data.uid).set(data);
   }
   getDetails(data: any) {
-    return this.firestore.collection("users").doc(data.uid).valueChanges();
+    return this.firestore.collection("users").doc(data).get();
   }
+
+  getCurrentUser() {
+    let userSub = this.auth.currentUser.then(user => {
+      console.log(user)
+      return user
+    });
+    // .subscribe(user => {
+    //   userSub.unsubscribe();
+    //   console.log("User:", user);
+    //   return user;
+    // });
+  }
+
+  getOwnedGames(data: any) {
+    return this.firestore.collection("games", ref => ref.where("owner", "==", data));
+  }
+
+
 
 
 

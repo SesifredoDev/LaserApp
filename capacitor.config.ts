@@ -1,4 +1,4 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from '@capacitor/cli'; 
 
 const config: CapacitorConfig = {
   appId: 'com.pchaffey.queenlaser',
@@ -31,6 +31,9 @@ const config: CapacitorConfig = {
         "yahoo.com",
         "phone"
       ]
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
     }
   }
 },

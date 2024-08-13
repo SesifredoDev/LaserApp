@@ -1,15 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button (click)="sendGotShot()"><ion-icon name="wifi-outline" ></ion-icon></ion-button>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-button (click)="connectToGame()"><ion-icon name="link-outline" ></ion-icon></ion-button>
+  
   <ion-list>
-    <ion-item *ngFor="let item of scanResults"><pre>{{item | json}}</pre></ion-item>
+    <ion-item button *ngFor="let item of scanResults" (click)="connectToDevice(item)"><pre>{{item | json}}</pre></ion-item>
   </ion-list>
   <pre>{{info | json}}</pre >
 </ion-content>

@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -29,6 +29,7 @@ import { initializeApp } from '@firebase/app';
     provideAuth(() => getAuth()),
   ],
   bootstrap: [AppComponent],
-  schemas: []
+  
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

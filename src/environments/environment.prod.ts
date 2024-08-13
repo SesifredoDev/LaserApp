@@ -1,15 +1,15 @@
 export const environment = {
   
-  socketUrl: "192.168.0.54:8080",
+
   production: true,
-  firebase: {
-    apiKey: "AIzaSyA7v-cUkk_3LnfKhOiw2wuvLDf4Fxc16VY",
-    authDomain: "global-tag-c412d.firebaseapp.com",
-    databaseURL: "https://global-tag-c412d-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "global-tag-c412d",
-    storageBucket: "global-tag-c412d.appspot.com",
-    messagingSenderId: "286910062728",
-    appId: "1:286910062728:web:c607e1e2e3d0f971637f3d",
-    measurementId: "G-038SP8859F"
+  socketUrl: "192.168.8.146:8080",
+   firebase: {
+    apiKey: "AIzaSyD0q5OLEhsMk6qB67pGTpZ1yC9AkGUlO2E",
+    authDomain: "queenlaser-48877.firebaseapp.com",
+    projectId: "queenlaser-48877",
+    storageBucket: "queenlaser-48877.appspot.com",
+    messagingSenderId: "762703167589",
+    appId: "1:762703167589:web:98f4a741ca28a74387868c",
+    measurementId: "G-1E658X30MX"
   }
 };

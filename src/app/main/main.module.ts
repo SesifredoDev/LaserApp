@@ -8,10 +8,14 @@ import { HomePageRoutingModule } from './home/home-routing.module';
 import { HomePageModule } from './home/home.module';
 import { WorkerService } from '../shared/services/worker.service';
 import { AuthGuard } from '@angular/fire/auth-guard';
+import { GameService } from '../shared/services';
+import { TabControlComponent } from './tab-control/tab-control.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TabControlComponent
+  ],
   imports: [
     CommonModule,
     MainRoutingModule,
@@ -20,16 +24,16 @@ import { AuthGuard } from '@angular/fire/auth-guard';
   
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MainModule implements OnInit{
+export class MainModule{
 
-  constructor(private socket: WorkerService){}
+  constructor(private gameService: GameService){}
 
-  ngOnInit(): void {
-    if(AuthGuard){
+  // ngOnInit(): void {
+  //   if(AuthGuard){
       
-      this.socket.socketConnect();
-    }else{
-      alert("not logged in")
-    }
-  }
+  //     this.socket.socketConnect();
+  //   }else{
+  //     alert("not logged in")
+  //   }
+  // }
  }

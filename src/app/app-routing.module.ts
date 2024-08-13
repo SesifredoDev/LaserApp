@@ -21,6 +21,12 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth-routing.module').then( m => m.AuthRoutingModule),
 
   },
+  {
+    path: 'menu',
+    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule),
+    data: {authGuardPipe: redirectUnauthorizedToLogin},
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

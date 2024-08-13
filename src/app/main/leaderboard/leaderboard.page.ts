@@ -9,22 +9,23 @@ import { WorkerService } from 'src/app/shared/services/worker.service';
 export class LeaderboardPage implements OnInit {
 
   leaderboard: any[] = []
+  subscriptionMade = false;
+  leaderboardReqest: any;
 
-  constructor(private scocketService: WorkerService) { }
-
-  ngOnInit() {
-    if(!this.scocketService.isConnected){
-      this.scocketService.socketConnect();
-    }
-
+  constructor(private socketService: WorkerService) { 
     
-    this.scocketService.leaderboard.subscribe((data)=>{
-        
-      this.leaderboard = data;
-      console.log(data)
-    })
-
-    this.scocketService.getLeaderboard();
   }
+  ngOnInit(): void {
+    
+      this.leaderboardReqest =  this.socketService.leaderboard.subscribe((data)=>{
+        
+        this.leaderboard = data;
+        console.log(this.leaderboard);
+      })
+
+      this.socketService.getLeaderboard();
+  
+  }
+
 
 }

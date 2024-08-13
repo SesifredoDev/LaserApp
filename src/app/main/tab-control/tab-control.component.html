@@ -1,0 +1,30 @@
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+
+</ion-content>
+<ion-footer>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="">
+      <ion-icon name="Home" ></ion-icon>
+      Home
+    </ion-tab-button>
+    <ion-tab-button routerLink="leaderboard">
+      <ion-icon name="medal"></ion-icon>
+      leaderboard
+    </ion-tab-button>
+    
+    <ion-tab-button routerLink="map">
+      <ion-icon name="navigate-circle-sharp"></ion-icon>
+      Radio
+    </ion-tab-button>
+    <ion-tab-button [routerLink]="'menu'">
+      <ion-icon name="cog"></ion-icon>
+      Settings
+    </ion-tab-button>
+    <ion-tab-button (click)="logout()" [routerLink]="'auth'">
+      <ion-icon name="exit"></ion-icon>
+      logout
+    </ion-tab-button>
+    
+  </ion-tab-bar>
+</ion-footer>

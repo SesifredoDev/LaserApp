@@ -6,7 +6,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
-export class SignupPage implements OnInit {
+export class SignupPage {
   public email:any;
   public password:any;
   public name:any;
@@ -14,8 +14,6 @@ export class SignupPage implements OnInit {
     public fireService:FirebaseService
   ) { }
 
-  ngOnInit() {
-  }
 
   signup(){ 
     this.fireService.signup({email:this.email,password:this.password}).then(res=>{
@@ -23,7 +21,8 @@ export class SignupPage implements OnInit {
         let data = {
           email:this.email,
           name:this.name,
-          uid:res.user.uid
+          uid:res.user.uid,
+          isAdmin:false,
         }
         this.fireService.saveDetails(data).then(res=>{
          alert('Account Created!');

@@ -24,9 +24,10 @@ export class LoginPage implements OnInit {
     this.fireService.loginWithEmail({email:this.email,password:this.password}).then((res: any)=>{
       console.log(res);
       if(res?.user?.uid){
-        this.fireService.getDetails({uid:res.user.uid}).subscribe((res: any)=>{
-          console.log(res)
-          localStorage.setItem("uid", res.uid)
+        let uid = res.user.uid;
+        this.fireService.getDetails(res.user.uid).subscribe((res: any)=>{
+          console.log(uid)
+          localStorage.setItem("uid", uid);
           this.router.navigateByUrl('')
         },err=>{
           alert(err.message);
