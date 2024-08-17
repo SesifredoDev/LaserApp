@@ -14,19 +14,24 @@ import { GameService } from './shared/services';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent{
   
   constructor(
     private gameService: GameService, 
     private platform: Platform,
     private router: Router, 
     private zone: NgZone) {
-     this.initializeApp();
+     
     this.platform.ready().then(() => {
-      console.log('Platform ready');
+      this.initializeApp();
+      
       
     });
   }
+
+  // ngOnInit(): void {
+    
+  // }
  
 
 

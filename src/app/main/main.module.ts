@@ -24,9 +24,14 @@ import { TabControlComponent } from './tab-control/tab-control.component';
   
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MainModule{
+export class MainModule {
 
-  constructor(private gameService: GameService){}
+  constructor(private gameService: GameService){
+    
+  }
+  // ngOnInit(): void {
+  //   gameService.setUp();
+  // }
 
   // ngOnInit(): void {
   //   if(AuthGuard){

@@ -1,16 +1,86 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>menu</ion-title>
+    <ion-buttons slot="end">
+      <ion-button> 
+        <ion-icon name="bluetooth" slot="start"></ion-icon> Connect Canon
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
   
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="getInfo()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  "CURRENTLY NOT CONNECTED"
+
+  <!-- <pre>
+    bluetooth: {{ bluetoothConnection}}
+    socket: {{socketConnection}}
+    gameData: {{activeGame | json}}
+  </pre> -->
+  <ion-card *ngIf="!socketConnection">
+    <ion-card-header>
+      <ion-title>
+        Server Connection ERROR
+      </ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        Unable to connect to the server. Please check your connection and try again.
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="socketConnection && !activeGame.isConnected">
+    <ion-card-header>
+      <ion-title>
+        Not Connected to a Game
+      </ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label slot="start">
+          Enter Game Code:
+        </ion-label>
+        
+        <ion-input #gameCodeInput></ion-input>
+      </ion-item>
+        <ion-button expand="full" (click)="connect(gameCodeInput.value)">Join Game</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="socketConnection && activeGame.isConnected">
+    <ion-card-header color="primary">
+      <ion-title>
+        Game Information
+      </ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            Game Name:
+          </ion-label>
+          <ion-label slot="end">{{activeGame.name}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            Game Code:
+          </ion-label>
+          <ion-label slot="end">{{activeGame.gameCode}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            Player Count:
+          </ion-label>
+          <ion-label slot="end">{{activeGame.playerCount}}</ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" (click)="disconnect()">Leave Game</ion-button>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

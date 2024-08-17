@@ -8,7 +8,8 @@ import { GlobalErrorHandlerService } from '../global-error-handler.service';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { ForegroundService } from '@capawesome-team/capacitor-android-foreground-service';
-
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { IGame } from '../../models/game-info.model';
 
 
 
@@ -18,8 +19,10 @@ import { ForegroundService } from '@capawesome-team/capacitor-android-foreground
 })
 export class GameService {
 
-  private readonly GH_URL =
-    'https://github.com/capawesome-team/capacitor-plugins';
+  socketConnection: boolean = false;
+  activeGame: IGame = {gameCode: "", isConnected: false};
+  bluetoothConnection: boolean = false;
+  
   user: any;
 
   constructor(
@@ -28,6 +31,7 @@ export class GameService {
     private bluetoothService: BluetoothService,
     private router: Router,
     private readonly ngZone: NgZone,
+    private backgroundMode: BackgroundMode,
   ) {
     // this.setUp();
     this.initializeBackgroundMode();
@@ -37,7 +41,24 @@ export class GameService {
   async initializeBackgroundMode() {
     await ForegroundService.requestManageOverlayPermission();
     await ForegroundService.requestPermissions();
-    await ForegroundService.startForegroundService({body: 'Laser Tag', title: 'Laser Tag', id: 1222, smallIcon:''});
+    this.backgroundMode.enable();
+    this.backgroundMode.disableBatteryOptimizations();
+
+
+    this.backgroundMode.on('activate').subscribe(async () => {
+      ForegroundService.moveToForeground();
+    })
+    this.backgroundMode.on('deactivate').subscribe(() => {
+      this.backgroundMode.moveToForeground();
+    })
+    
+  }
+
+
+  RunInBackground() {
+    this.backgroundMode.moveToBackground();
+    
+    
   }
 
   async setUp() {
@@ -58,7 +79,7 @@ export class GameService {
     // Bluetooth Setup
 
     this.bluetoothService.isConnected.subscribe(isConnected => {
-      console.log('Bluetooth is connected?', isConnected);
+      this.bluetoothConnection = isConnected;
 
     })
 
@@ -70,6 +91,7 @@ export class GameService {
     // Server Connection
     this.socketService.isConnected.subscribe(isConnected => {
       console.log('Socket is connected?', isConnected);
+      this.socketConnection = isConnected;
       if (!isConnected) {
 
         console.error('Server not connected. Reconnecting...');
@@ -83,9 +105,18 @@ export class GameService {
     // Activated Game
 
     this.socketService.activeGame.subscribe(code => {
-      console.log('Active game code:', code.activeCode);
-      if(code.activeCode !== undefined) {
-        localStorage.setItem('activeCode', code.activeCode);
+      console.log('Active game code:', code.gameCode);
+      this.activeGame = code;
+      if(code.gameCode !== undefined) {
+        localStorage.setItem('activeCode', code.gameCode);
+      }
+
+      if (!code.isConnected) {
+
+        console.error('Game not connected. Reconnecting...');
+        this.router.navigate(['menu']);
+      } else {
+        this.router.navigate(['']);
       }
     })
 
@@ -110,9 +141,16 @@ export class GameService {
   }
 
 
-  connectToGame(code: string) {
+  connectToGame(code: string, extraInfo?: any) {
+   let  playerInfo = {uid: this.user.uid, name: this.user.name}
+    if(extraInfo){
+      playerInfo = {...playerInfo,...extraInfo}
+    }
+    this.socketService.joinGame(code, playerInfo)
+  }
 
-    this.socketService.joinGame(code, this.user)
+  disconnectFromGame(){
+    this.socketService.disconnectGame();
   }
 
   gotShot(any: any) {

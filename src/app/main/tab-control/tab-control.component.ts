@@ -9,7 +9,7 @@ import { BluetoothService, FirebaseService, GameService, LocationService, Worker
   templateUrl: './tab-control.component.html',
   styleUrls: ['./tab-control.component.scss']
 })
-export class TabControlComponent  implements OnInit {
+export class TabControlComponent  {
   constructor(
     private readonly ls: LocationService,
     private gameService: GameService,

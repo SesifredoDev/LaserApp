@@ -5,13 +5,16 @@ import {io} from 'socket.io-client';
 import { LocationService } from './location.service';
 import { Subject } from 'rxjs';
 import { FirebaseService } from './firebase.service';
+import { IGame, IGameRequirements } from '../models/game-info.model';
+import { ModalController } from '@ionic/angular';
+import { RequirementsComponent } from 'src/app/menu/requirements/requirements.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkerService {
   isConnected: Subject<boolean> = new Subject<boolean>();
-  activeGame: Subject<{activeCode:string, isConnected: boolean}> = new Subject<{activeCode:string, isConnected: boolean}>();
+  activeGame: Subject<IGame> = new Subject<IGame>();
   
   socket: any;
   heatmapValues: Subject<any[]> = new Subject<any[]>();
@@ -24,7 +27,7 @@ export class WorkerService {
 
 
 
-  constructor(private ls: LocationService, private fireService: FirebaseService) { }
+  constructor(private ls: LocationService, private fireService: FirebaseService, private modalCtrl: ModalController) { }
   socketConnect(){
     try{
       
@@ -34,6 +37,7 @@ export class WorkerService {
       
       this.socket.on("disconnect", ()=>{
         this.isConnected.next(false);
+        this.activeGame.next({gameCode: "", isConnected: false});
       })
 
       this.socket.on("connect_error", (err: any) => {
@@ -52,18 +56,36 @@ export class WorkerService {
       // Connected To Game
 
       this.socket.on("connectGame", (data: any) =>{
-        this.activeGame.next({activeCode: data.code, isConnected: true});
+        this.activeGame.next({gameCode: data.gameCode, isConnected: true, name: data.name, playerCount: data.playerCount  });
         this.activeCode = data.code;
         
         console.log("Connected to game", data);
         this.leaderboard.next(data.leaderboard)
         this.currentLeaderboard = data.leaderboard;
-      })  
+      });
+      
+      this.socket.on("gameRequirements", async (data: any)=>{
+        let code = data.gameCode;
+        console.log("requirements to game", data);
+        let requirements: IGameRequirements = data.requirements;
+        let requireModal = await this.modalCtrl.create({
+          component: RequirementsComponent,
+          componentProps: {
+            code: code,
+            requirements: requirements
+          },
+          backdropDismiss: false
+        } )
+
+        requireModal.present();
+      })
 
       this.socket.on("disconnectGame", (data: any) =>{
-        this.activeGame.next({activeCode: "", isConnected: false});
+        this.activeGame.next({gameCode: "", isConnected: false});
         this.activeCode = "";
       })
+
+
 
       // HeatMap Update
 
@@ -127,12 +149,19 @@ export class WorkerService {
   joinGame(code: string, user: any){
     
     let result = {gameCode: code, playerInfo: user}
+    console.log("Joining game", result);
     if(user && result){
       
       this.socket.emit("joinGame", result);
     }else{
       console.log(user, result)
     }
+  }
+
+
+  disconnectGame(){
+    this.socket.emit("disconnectGame");
+    this.activeGame.next({gameCode: "", isConnected: false});
   }
 
   disconnectSocket(){

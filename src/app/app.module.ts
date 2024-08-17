@@ -13,12 +13,14 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from '@firebase/app';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { RequirementsComponent } from './menu/requirements/requirements.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
   
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicModule,
+  declarations: [AppComponent, RequirementsComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicModule, ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [BackgroundMode, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

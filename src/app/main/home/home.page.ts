@@ -79,6 +79,10 @@ export class HomePage implements OnInit {
     this.gameService.connectToGame("test");
   }
 
+  runInBackground(){
+    this.gameService.RunInBackground();
+  }
+
     
 
 }

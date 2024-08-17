@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { WorkerService } from './worker.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+
+  changedAuth: Subject<string> = new Subject();
   constructor(
     public firestore: AngularFirestore,
     public auth: AngularFireAuth,
@@ -15,6 +18,7 @@ export class FirebaseService {
   ) {}
   loginWithEmail(data: any) {
     return this.auth.signInWithEmailAndPassword(data.email, data.password);
+    this.changedAuth.next(data.email);
   }
 
   signup(data: any) {

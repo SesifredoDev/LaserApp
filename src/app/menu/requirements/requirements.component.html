@@ -1,0 +1,63 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Game Requirements</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="form">
+      <!-- Email Field -->
+      <div *ngIf="requirements.isEmail">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" formControlName="requiredEmail"></ion-input>
+        </ion-item>
+        <ion-note *ngIf="form.get('requiredEmail')?.touched && form.get('requiredEmail')?.invalid" color="danger">
+          Email is required and must be valid.
+        </ion-note>
+      </div>
+
+      <!-- ID Field -->
+      <div *ngIf="requirements.isId">
+        <ion-item>
+          <ion-label position="floating">ID</ion-label>
+          <ion-input type="text" formControlName="requiredId"></ion-input>
+        </ion-item>
+        <ion-note *ngIf="form.get('requiredId')?.touched && form.get('requiredId')?.invalid" color="danger">
+          ID is required.
+        </ion-note>
+      </div>
+
+      <!-- Custom Name Field -->
+      <div *ngIf="requirements.isCustomName">
+        <ion-item>
+          <ion-label position="floating">Custom Name</ion-label>
+          <ion-input type="text" formControlName="customName"></ion-input>
+        </ion-item>
+        <ion-note *ngIf="form.get('customName')?.touched && form.get('customName')?.invalid" color="danger">
+          Custom Name is required.
+        </ion-note>
+      </div>
+
+      <!-- Radar Field -->
+      <div *ngIf="requirements.isRadar">
+        <ion-item>
+          <ion-label  slot="start">Radar</ion-label>
+          <ion-toggle formControlName="radar" slot="end"></ion-toggle>
+        </ion-item>
+        <ion-note *ngIf="form.get('radar')?.touched && form.get('radar')?.invalid" color="danger">
+          Radar is required.
+        </ion-note>
+      </div>
+
+      <!-- Submit Button -->
+       <ion-buttons>
+        <ion-button fill="" type="submit" (click)="connect()" [disabled]="form.invalid">
+          Submit
+        </ion-button>
+        <ion-button color="warning" (click)="cancel()">
+          Cancel
+        </ion-button>
+       </ion-buttons>
+      
+    </form>
+  </ion-card-content>
+</ion-card>

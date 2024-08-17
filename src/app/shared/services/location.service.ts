@@ -19,7 +19,7 @@ export class LocationService {
             backgroundMessage: 'Check out the Radar for game activity!',
             backgroundTitle: 'Laser Active! 🥳😎',
             requestPermissions: true,
-            stale: false, // Get the most accurate location possible
+            stale: true, // Get the most accurate location possible
           },
           (location, error) => {
             if (location) {
