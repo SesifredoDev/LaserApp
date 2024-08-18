@@ -1,2 +1,78 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+ion-toolbar {
+    --offset: 3px;
+    --offset-top:0px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top: 0px;
+    background-color: rgb(20, 20, 20);
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Conic gradient */
+ion-toolbar::before { 
+    content: '';
+    background: conic-gradient(transparent 270deg, rgb(73, 86, 255), transparent);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1;
+    width: 100%;
+    animation: rotate 4s linear infinite;
+}
+
+/* Overlay */
+ion-toolbar::after {
+    content: '';
+    background: inherit;
+    border-radius: inherit;
+    position: absolute;
+    inset: var(--offset);
+    height: calc(100% - 2 * var(--offset));
+    width: calc(100% - 2 * var(--offset));
+}
+
+ion-content{
+    --background:  url(https://www.pngall.com/wp-content/uploads/15/Honeycomb-Pattern-PNG-Photos.png) ;
+    -webkit-animation: AnimationName 15s ease infinite;
+    -moz-animation: AnimationName 15s ease infinite;
+    animation: AnimationName 15s ease infinite;
+    
+    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgb(0, 0, 0) 27%, rgba(9, 121, 121, 0.357) 35%, rgb(0, 0, 0) 42%, rgba(0,0,0,1) 100%) no-repeat;
+    background-color: black;
+    background-size: 200% 200%;
+}
+
+ion-tab-bar{
+    --offset:3px ;
+    border-top-left-radius:10px ;
+    border-top-right-radius: 10px
+}
+
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:100% 50%}
+    100%{background-position:-100% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:100% 50%}
+    100%{background-position:-100% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:100% 50%}
+    100%{background-position:-100% 50%}
+}
+
+@keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+    }
+}
