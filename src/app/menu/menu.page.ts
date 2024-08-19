@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BluetoothService, GameService, WorkerService } from '../shared/services';
 import { IGame } from '../shared/models/game-info.model';
+import { ThemeService } from '../shared/services/theme/theme.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,17 +17,22 @@ export class MenuPage implements OnInit {
   constructor( 
    private gameService: GameService,
    private socketService: WorkerService,
-  
+   private themeService: ThemeService
   ) {
+    
+   }
+   ngOnInit(): void {
     this.socketService.activeGame.subscribe(game =>{
       this.getInfo();
     })
 
-   }
-   ngOnInit(): void {
+    this.gameService.setUp();
      this.getInfo();
    }
 
+   loadTheme(theme: string){
+    this.themeService.setTheme(theme);
+   }
 
    connect(code: any){
     // console.log(code)

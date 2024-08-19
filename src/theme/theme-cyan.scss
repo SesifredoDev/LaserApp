@@ -1,0 +1,16 @@
+
+:root {
+    --primary-color: rgba(0, 255, 255, 0.3);
+    --secondary-color: rgba(0, 255, 255, 0.5);
+    --tertiary-color: rgba(0, 255, 255, 0.6);
+    --quaternary-color: rgba(0, 255, 255, 0.7);
+    --quinary-color: rgba(255, 255, 255, 0.1);
+    --senary-color: rgba(255, 255, 255, 0.4);
+    --septenary-color: rgba(0, 120, 255, 0.4);
+    --octonary-color: rgba(0, 120, 255, 0.2);
+    --nonary-color: rgba(0, 120, 255, 0.7);
+    --denary-color: rgba(0, 120, 255, 0.16%);
+    --background-gradient:  linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+    --text-color: #0ff;
+  }
+  

@@ -7,21 +7,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-pading">
+<ion-content class="ion-padding">
   <div class="form">
     <ion-item>
       <ion-input label="Name" labelPlacement="floating" [(ngModel)]='name'></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input  label="Email" labelPlacement="floating" [(ngModel)]='email'></ion-input>
+      <ion-input label="Email" labelPlacement="floating" [(ngModel)]='email'></ion-input>
     </ion-item>
     <br>
     <ion-item>
-      <ion-input  label="Password" labelPlacement="floating" [(ngModel)]='password'></ion-input>
+      <ion-input label="Password" labelPlacement="floating" [(ngModel)]='password'></ion-input>
+    </ion-item>
+    <br>
+    <!-- Profile Image Input -->
+    <ion-item>
+      <input type="file" (change)="onFileSelected($event)" />
     </ion-item>
     <ion-button (click)='signup()' expand='block'>Signup</ion-button>
     <br>
-    
     <ion-button [routerLink]="['../']">Login</ion-button>
   </div>
 </ion-content>

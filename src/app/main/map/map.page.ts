@@ -34,8 +34,9 @@ export class MapPage implements OnInit {
 
 
 
-    this.tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &amp; USGS'
+    this.tiles = L.tileLayer('https://tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &amp; USGS',
+      accessToken: "AmXW5tm4Hyi0EiAB16rJImUAQikEecBfBJvf5b0x3yaoNNEvVkzlGCkULxsteqEi"
     });
     this.heatMap = (L as any).heatLayer(this.heatMapValues
       , { radius: 45, scaleRadius: false })

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BleClient, BleDevice, ScanResult , numberToUUID } from '@capacitor-community/bluetooth-le';
-import { Subject } from 'rxjs';
+import { BleClient, BleDevice, ScanResult, numberToUUID } from '@capacitor-community/bluetooth-le';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BluetoothService {
   list: any;
@@ -12,30 +12,37 @@ export class BluetoothService {
   bleIsEnabled = false;
   searchingDevices = false;
   isIntialised: boolean = false;
-  info: any = "";
+  info: any = '';
 
   // shotUpdate
-
   shotUpdate: Subject<string> = new Subject<any>();
-
 
   // Settings
   myService = numberToUUID(0x180d);
   myCharacteristic = '00002a37-0000-1000-8000-00805f9b34fb';
 
-  isConnected: Subject<boolean> = new Subject<boolean>();
+  isConnected: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor() {}
+
   async initialized(): Promise<boolean> {
     if (!this.isIntialised) {
-
       try {
         await BleClient.initialize();
-        this.isIntialised = true
-
-        BleClient.enable();
-        this.getConnectedDevices();
-
+        this.isIntialised = true;
+        BleClient.isEnabled().then((isEnabled) => {
+          if (!isEnabled) {
+            BleClient.requestEnable()
+              .then((didEnable) => {
+                this.getConnectedDevices();
+              })
+              .catch((error) => {
+                console.error('Failed to enable Bluetooth', error);
+              });
+          } else {
+            this.getConnectedDevices();
+          }
+        });
       } catch (e) {
         this.isIntialised = false;
         console.error('Failed to initialize Bluetooth', e);
@@ -44,27 +51,32 @@ export class BluetoothService {
     return this.isIntialised;
   }
 
-
-
   async getConnectedDevices() {
-    
-    try{
-    this.devices = await BleClient.getConnectedDevices([this.myService]);
-    console.log(this.devices)
-    console.info(`Found ${this.devices.length} connected devices`);
-    for (const device of this.devices) {
-      this.connectToDevice(device);
-    }
-    if(this.devices.length == 0){
-        let deviceId = localStorage.getItem('bleDeviceId');
-        console.log('deviceId:', deviceId);
-        if(deviceId){
-          this.connectToDevice({deviceId: deviceId});
-        }else{
-          throw new Error('No connected devices found');
+    try {
+      // Attempt to reconnect to the last known device
+      const lastDeviceId = localStorage.getItem('bleDeviceId');
+      if (lastDeviceId) {
+        const devices = await BleClient.getConnectedDevices([this.myService]);
+        const lastDevice = devices.find((device) => device.deviceId === lastDeviceId);
+
+        if (lastDevice) {
+          console.info(`Reconnecting to last known device: ${lastDevice.name}`);
+          await this.connectToDevice(lastDevice);
+          return;
         }
       }
-    }catch(e){
+
+      // If not connected, scan for devices
+      this.devices = await BleClient.getConnectedDevices([this.myService]);
+      console.info(`Found ${this.devices.length} connected devices`);
+      if (this.devices.length > 0) {
+        // Automatically connect to the first available device
+        await this.connectToDevice(this.devices[0]);
+      } else {
+        console.info('No devices found during initial scan, starting full scan.');
+        await this.startDeviceScan();
+      }
+    } catch (e) {
       console.error(e);
     }
   }
@@ -72,17 +84,30 @@ export class BluetoothService {
   async startDeviceScan(): Promise<BleDevice[]> {
     this.scanResults = [];
     this.searchingDevices = true;
-    await BleClient.requestLEScan({ services: [this.myService] }, (scanResult: ScanResult) => {
+
+    await BleClient.requestLEScan({ services: [this.myService] }, async (scanResult: ScanResult) => {
       const foundDevice = scanResult.device;
       foundDevice.name = scanResult.localName || foundDevice.name;
       console.log(`New device found: ${foundDevice.name}`);
       this.scanResults?.push(foundDevice);
+
+      // Attempt to auto-connect to the last known device during the scan
+      const lastDeviceId = localStorage.getItem('bleDeviceId');
+      if (lastDeviceId && foundDevice.deviceId === lastDeviceId) {
+        console.info(`Auto-connecting to last known device: ${foundDevice.name}`);
+        await this.connectToDevice(foundDevice);
+        BleClient.stopLEScan();
+      }
     });
 
     setTimeout(async () => {
-      // this.info ='Trying to stop scanning';
       await BleClient.stopLEScan();
       this.searchingDevices = false;
+
+      // If no last known device, connect to the first available device
+      if (this.scanResults?.length && !this.isConnected.getValue()) {
+        await this.connectToDevice(this.scanResults[0]);
+      }
     }, 30000);
 
     return this.scanResults;
@@ -92,44 +117,37 @@ export class BluetoothService {
     return this.isConnected;
   }
 
-
   async onDisconnect(deviceId: any) {
     console.log(`Device ${deviceId} disconnected`);
-    let connectedDevices = await BleClient.getConnectedDevices([this.myService])
+    let connectedDevices = await BleClient.getConnectedDevices([this.myService]);
 
-    if(connectedDevices.length === 0){
+    if (connectedDevices.length === 0) {
       this.isConnected.next(false);
-
     }
   }
 
-  async onConnect(device: BleDevice){
+  async onConnect(device: BleDevice) {
     localStorage.setItem('bleDeviceId', device.deviceId);
     this.isConnected.next(true);
-    // BleClient.createBond(device.deviceId);
-    await BleClient.startNotifications(
-      device.deviceId,
-      this.myService,
-      this.myCharacteristic,
-      (value :any) => {
-        
-        console.log('Notification as string:', value.buffer);
-        const dataView = new DataView(value.buffer);
-        
-        const textDecoder = new TextDecoder('utf-8');
-        const stringValue = textDecoder.decode(value);
-        
-        this.shotUpdate.next(stringValue);
 
-      });
+    await BleClient.startNotifications(device.deviceId, this.myService, this.myCharacteristic, (value: any) => {
+      console.log('Notification as string:', value.buffer);
+      const dataView = new DataView(value.buffer);
+
+      const textDecoder = new TextDecoder('utf-8');
+      const stringValue = textDecoder.decode(value);
+
+      this.shotUpdate.next(stringValue);
+    });
   }
 
   async connectToDevice(device: BleDevice) {
-    BleClient.connect(device.deviceId,
-      (data) => this.onDisconnect(data)
-    )
-    .then(() => this.onConnect(device))
-  
-
-}
+    try {
+      await BleClient.connect(device.deviceId, (data) => this.onDisconnect(data));
+      await this.onConnect(device);
+    } catch (e) {
+      console.error('Failed to connect to device', e);
+      this.isConnected.next(false);
+    }
+  }
 }

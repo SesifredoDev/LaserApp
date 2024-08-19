@@ -18,7 +18,7 @@ export class FirebaseService {
   ) {}
   loginWithEmail(data: any) {
     return this.auth.signInWithEmailAndPassword(data.email, data.password);
-    this.changedAuth.next(data.email);
+    
   }
 
   signup(data: any) {
@@ -35,6 +35,10 @@ export class FirebaseService {
   }
   getDetails(data: any) {
     return this.firestore.collection("users").doc(data).get();
+  }
+
+  updateDetails(data: any) {
+    return this.firestore.collection("users").doc(data.uid).update(data);
   }
 
   getCurrentUser() {

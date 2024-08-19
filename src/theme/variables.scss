@@ -1,78 +1,532 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+
+// RED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ 
+[data-theme='cyan'] {
+    --primary-color: rgba(0, 255, 255, 0.3);
+    --secondary-color: rgba(0, 255, 255, 0.5);
+    --tertiary-color: rgba(0, 255, 255, 0.6);
+    --quaternary-color: rgba(0, 255, 255, 0.7);
+    --quinary-color: rgba(255, 255, 255, 0.1);
+    --senary-color: rgba(255, 255, 255, 0.4);
+    --septenary-color: rgba(0, 120, 255, 0.4);
+    --octonary-color: rgba(0, 120, 255, 0.2);
+    --nonary-color: rgba(0, 120, 255, 0.7);
+    --denary-color: rgba(0, 120, 255, 0.16%);
+    --background-gradient:  linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+    --text-color: #0ff;
+}
+
+[data-theme='red']{
+  --primary-color: rgba(255, 0, 0, 0.3); /* Light Red */
+    --secondary-color: rgba(255, 0, 0, 0.5); /* Medium Red */
+    --tertiary-color: rgba(255, 0, 0, 0.6); /* Dark Red */
+    --quaternary-color: rgba(255, 0, 0, 0.7); /* Deeper Red */
+  
+    /* Supporting Colors */
+    --quinary-color: rgba(255, 255, 255, 0.1); /* Very Light Red or White (for contrast) */
+    --senary-color: rgba(255, 255, 255, 0.4); /* Lighter Red or White (for borders) */
+    --septenary-color: rgba(200, 0, 0, 0.4); /* Deep Red */
+    --octonary-color: rgba(200, 0, 0, 0.2); /* Lighter Deep Red */
+    --nonary-color: rgba(200, 0, 0, 0.7); /* Strong Deep Red */
+    --denary-color: rgba(200, 0, 0, 0.16); /* Very Dark Red */
+  
+    /* Background Gradient */
+    --background-gradient: linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+  
+    --text-color: white;
+}
+
+/* Pink Theme */
+[data-theme='pink'] {
+  --primary-color: rgba(255, 105, 180, 0.3); /* Light Pink */
+  --secondary-color: rgba(255, 105, 180, 0.5); /* Medium Pink */
+  --tertiary-color: rgba(255, 105, 180, 0.6); /* Dark Pink */
+  --quaternary-color: rgba(255, 105, 180, 0.7); /* Deeper Pink */
+  --quinary-color: rgba(255, 255, 255, 0.1); /* Very Light Pink or White */
+  --senary-color: rgba(255, 255, 255, 0.4); /* Lighter Pink or White */
+  --septenary-color: rgba(255, 20, 147, 0.4); /* Deep Pink */
+  --octonary-color: rgba(255, 20, 147, 0.2); /* Lighter Deep Pink */
+  --nonary-color: rgba(255, 20, 147, 0.7); /* Strong Deep Pink */
+  --denary-color: rgba(255, 20, 147, 0.16); /* Very Dark Deep Pink */
+  --background-gradient: linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+  --text-color: #ff69b4; /* Hot Pink */
+}
+
+/* Purple Theme */
+[data-theme='purple'] {
+  --primary-color: rgba(128, 0, 128, 0.3); /* Light Purple */
+  --secondary-color: rgba(128, 0, 128, 0.5); /* Medium Purple */
+  --tertiary-color: rgba(128, 0, 128, 0.6); /* Dark Purple */
+  --quaternary-color: rgba(128, 0, 128, 0.7); /* Deeper Purple */
+  --quinary-color: rgba(255, 255, 255, 0.1); /* Very Light Purple or White */
+  --senary-color: rgba(255, 255, 255, 0.4); /* Lighter Purple or White */
+  --septenary-color: rgba(75, 0, 130, 0.4); /* Deep Purple */
+  --octonary-color: rgba(75, 0, 130, 0.2); /* Lighter Deep Purple */
+  --nonary-color: rgba(75, 0, 130, 0.7); /* Strong Deep Purple */
+  --denary-color: rgba(75, 0, 130, 0.16); /* Very Dark Deep Purple */
+  --background-gradient: linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+  --text-color: #eb83eb; /* Purple */
+}
+
+/* Green Theme */
+[data-theme='green'] {
+  --primary-color: rgba(0, 255, 0, 0.3); /* Light Green */
+  --secondary-color: rgba(0, 255, 0, 0.5); /* Medium Green */
+  --tertiary-color: rgba(0, 255, 0, 0.6); /* Dark Green */
+  --quaternary-color: rgba(0, 255, 0, 0.7); /* Deeper Green */
+  --quinary-color: rgba(255, 255, 255, 0.1); /* Very Light Green or White */
+  --senary-color: rgba(255, 255, 255, 0.4); /* Lighter Green or White */
+  --septenary-color: rgba(0, 128, 0, 0.4); /* Deep Green */
+  --octonary-color: rgba(0, 128, 0, 0.2); /* Lighter Deep Green */
+  --nonary-color: rgba(0, 128, 0, 0.7); /* Strong Deep Green */
+  --denary-color: rgba(0, 128, 0, 0.16); /* Very Dark Deep Green */
+  --background-gradient: linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+  --text-color: #0f0; /* Lime Green */
+}
+
+/* Silver Theme */
+[data-theme='silver'] {
+  --primary-color: rgba(192, 192, 192, 0.3); /* Light Silver */
+  --secondary-color: rgba(192, 192, 192, 0.5); /* Medium Silver */
+  --tertiary-color: rgba(192, 192, 192, 0.6); /* Dark Silver */
+  --quaternary-color: rgba(192, 192, 192, 0.7); /* Deeper Silver */
+  --quinary-color: rgba(255, 255, 255, 0.1); /* Very Light Silver or White */
+  --senary-color: rgba(255, 255, 255, 0.4); /* Lighter Silver or White */
+  --septenary-color: rgba(169, 169, 169, 0.4); /* Deep Silver */
+  --octonary-color: rgba(169, 169, 169, 0.2); /* Lighter Deep Silver */
+  --nonary-color: rgba(169, 169, 169, 0.7); /* Strong Deep Silver */
+  --denary-color: rgba(169, 169, 169, 0.16); /* Very Dark Deep Silver */
+  --background-gradient: linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+  --text-color: #c0c0c0; /* Silver */
+}
+
+/* Gold Theme */
+[data-theme='gold'] {
+  --primary-color: rgba(255, 215, 0, 0.3); /* Light Gold */
+  --secondary-color: rgba(255, 215, 0, 0.5); /* Medium Gold */
+  --tertiary-color: rgba(255, 215, 0, 0.6); /* Dark Gold */
+  --quaternary-color: rgba(255, 215, 0, 0.7); /* Deeper Gold */
+  --quinary-color: rgba(255, 255, 255, 0.1); /* Very Light Gold or White */
+  --senary-color: rgba(255, 255, 255, 0.4); /* Lighter Gold or White */
+  --septenary-color: rgba(204, 204, 0, 0.4); /* Deep Gold */
+  --octonary-color: rgba(204, 204, 0, 0.2); /* Lighter Deep Gold */
+  --nonary-color: rgba(204, 204, 0, 0.7); /* Strong Deep Gold */
+  --denary-color: rgba(204, 204, 0, 0.16); /* Very Dark Deep Gold */
+  --background-gradient: linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+  --text-color: #ffd700; /* Gold */
+}
+
+
+// 
+@import '@ionic/angular/css/palettes/dark.always.css';
+* {
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
 ion-toolbar {
-    --offset: 3px;
-    --offset-top:0px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-top: 0px;
-    background-color: rgb(20, 20, 20);
-    position: relative;
-    max-width: 100%;
-    overflow: hidden;
+  background: rgba(20, 20, 30, 0.9); /* Dark semi-transparent background */
+  box-shadow: 0 2px 15px var(--secondary-color); /* Neon glow under the toolbar */
+  color: --primary-color;
+  position: relative;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
-/* Conic gradient */
-ion-toolbar::before { 
-    content: '';
-    background: conic-gradient(transparent 270deg, rgb(73, 86, 255), transparent);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    aspect-ratio: 1;
-    width: 100%;
-    animation: rotate 4s linear infinite;
+ion-toolbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
+  box-shadow: inset 0 0 15px var(--secondary-color);
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* Overlay */
 ion-toolbar::after {
-    content: '';
-    background: inherit;
-    border-radius: inherit;
-    position: absolute;
-    inset: var(--offset);
-    height: calc(100% - 2 * var(--offset));
-    width: calc(100% - 2 * var(--offset));
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--quaternary-color);
+  box-shadow: 0 0 8px var(--quaternary-color);
+  z-index: 1;
+  pointer-events: none;
 }
 
-ion-content{
-    --background:  url(https://www.pngall.com/wp-content/uploads/15/Honeycomb-Pattern-PNG-Photos.png) ;
-    -webkit-animation: AnimationName 15s ease infinite;
-    -moz-animation: AnimationName 15s ease infinite;
-    animation: AnimationName 15s ease infinite;
-    
-    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgb(0, 0, 0) 27%, rgba(9, 121, 121, 0.357) 35%, rgb(0, 0, 0) 42%, rgba(0,0,0,1) 100%) no-repeat;
-    background-color: black;
-    background-size: 200% 200%;
+ion-content {
+  --background: url(https://www.pngall.com/wp-content/uploads/15/Honeycomb-Pattern-PNG-Photos.png) 10px 10px;
+  -webkit-animation: AnimationName 10s linear infinite;
+  -moz-animation: AnimationName 10s linear infinite;
+  animation: AnimationName 10s linear infinite;
+
+  background: var(--background-gradient);
+  background-color: black;
+  background-size: 300% 200%;
 }
 
-ion-tab-bar{
-    --offset:3px ;
-    border-top-left-radius:10px ;
-    border-top-right-radius: 10px
+ion-tab-bar {
+  --offset: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
+ion-toolbar ion-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+ion-fab-button {
+  height: 50px;
+  width: 50px;
+  background: var(--background-gradient);
+  border: 1px solid var(--tertiary-color); /* Cyan border */
+  box-shadow: 0 4px 15px var(--secondary-color),
+    inset 0 0 10px var(--primary-color); /* Neon glow effect */
+  border-radius: 50%; /* Circular button */
+  color: var(--text-color); /* Neon cyan icon color */
+  position: relative;
+  overflow: hidden;
+}
+
+ion-fab-button::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 10px var(--secondary-color);
+  z-index: 1;
+  pointer-events: none;
+}
+
+ion-fab-button::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border-radius: 50%;
+  border: 1px solid var(--quinary-color);
+  z-index: 0;
+  pointer-events: none;
+}
 
 @-webkit-keyframes AnimationName {
-    0%{background-position:100% 50%}
-    100%{background-position:-100% 50%}
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: -50% 50%;
+  }
 }
+
 @-moz-keyframes AnimationName {
-    0%{background-position:100% 50%}
-    100%{background-position:-100% 50%}
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: -50% 50%;
+  }
 }
+
 @keyframes AnimationName {
-    0%{background-position:100% 50%}
-    100%{background-position:-100% 50%}
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: -50% 50%;
+  }
 }
 
-@keyframes rotate {
-    from {
-        transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
-    }
+ion-title {
+  color: rgba(255, 255, 255, 0.641);
+  text-shadow: rgba(0, 0, 0, 0.5) -1px 0, rgba(0, 0, 0, 0.3) 0 -1px, rgba(255, 255, 255, 0.5) 0 1px, rgba(0, 0, 0, 0.3) -1px -2px;
+}
 
-    to {
-        transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
-    }
+ion-card {
+  background: rgba(20, 20, 30, 0.9); /* Dark semi-transparent background */
+  border: 1px solid var(--primary-color); /* Cyan border for the digital effect */
+  border-radius: 10px;
+  box-shadow: 0 0 15px var(--secondary-color),
+    0 0 30px var(--primary-color); /* Neon glow effect */
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+ion-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--primary-color);
+  box-shadow: inset 0 0 15px var(--secondary-color);
+  z-index: 2;
+  pointer-events: none;
+}
+
+ion-card::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border: 1px solid var(--quinary-color);
+  z-index: 1;
+  pointer-events: none;
+}
+
+ion-item {
+  background: rgba(30, 30, 40, 0.8);
+  border: 1px solid var(--senary-color);
+  border-radius: 5px;
+  margin: 5px 0;
+  padding: 15px;
+  color: var(--text-color); /* Neon cyan text color */
+  position: relative;
+  overflow: hidden;
+}
+
+ion-item::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  border: 1px solid var(--primary-color);
+  box-shadow: inset 0 0 10px var(--secondary-color);
+  z-index: 1;
+  pointer-events: none;
+}
+
+ion-item::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border: 1px solid var(--quinary-color);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.loading-text {
+  font-family: monospace; /* Gives a typewriter effect */
+  overflow: hidden; /* Ensures text does not overflow */
+  white-space: nowrap; /* Keeps the text in a single line */
+  width: 0; /* Starts with 0 width for animation */
+  animation: typing 4s steps(30, end) forwards;
+}
+
+/* ION BUTTONS */
+ion-button {
+  --background: transparent;
+  --border-radius: 5px;
+  --border: 1px solid var(--tertiary-color);
+  --box-shadow: 0 4px 15px var(--secondary-color),
+    inset 0 0 10px var(--primary-color);
+  --color: var(--text-color);
+  --padding: 15px 25px;
+  --text-transform: uppercase;
+  --font-weight: bold;
+  --letter-spacing: 1px;
+  --transition: 0.3s ease-in-out;
+  --hover-background: linear-gradient(145deg, rgba(20, 20, 30, 1), var(--tertiary-color));
+  --hover-box-shadow: 0 6px 20px var(--secondary-color), inset 0 0 15px var(--primary-color);
+}
+
+ion-button::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 10px var(--secondary-color);
+  z-index: 1;
+  pointer-events: none;
+}
+
+ion-button::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border: 1px solid var(--quinary-color);
+  z-index: 0;
+  pointer-events: none;
+}
+
+ion-button:hover {
+  --background: var(--hover-background);
+  --box-shadow: var(--hover-box-shadow);
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%; /* Ensures the full text is revealed */
+  }
+}
+
+.loading-bar {
+  width: 0%;
+  height: 5px;
+  background: var(--septenary-color);
+  animation: loading-animation 5s linear infinite;
+}
+
+@keyframes loading-animation {
+  0% {
+    width: 0;
+
+  }
+
+  50% {
+    width: 50%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.circle-loading {
+  height: 70px;
+  width: 70px;
+  background-color: var(--septenary-color);
+  border-radius: 50%;
+  border: 5px solid var(--octonary-color);
+  position: relative;
+}
+
+.circle-loading::before {
+  content: '';
+  height: 50px;
+  width: 50px;
+  background-color: var(--nonary-color);
+  border-radius: 50%;
+  border: 5px solid var(--denary-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes color-shift {
+  0% {
+    --primary-color: rgba(0, 255, 255, 0.3);
+    --secondary-color: rgba(0, 255, 255, 0.5);
+    --tertiary-color: rgba(0, 255, 255, 0.6);
+  }
+
+  50% {
+    --primary-color: rgba(255, 255, 255, 0.5);
+    --secondary-color: rgba(0, 255, 255, 0.7);
+    --tertiary-color: rgba(255, 255, 255, 0.4);
+  }
+
+  100% {
+    --primary-color: rgba(0, 255, 255, 0.3);
+    --secondary-color: rgba(0, 255, 255, 0.5);
+    --tertiary-color: rgba(0, 255, 255, 0.6);
+  }
+}
+
+
+
+.cyberpunk-card {
+  background: var(--octonary-color); /* Updated to use the new blue variable */
+  border-radius: 10px;
+  box-shadow: 0 0 20px var(--nonary-color), inset 0 0 15px var(--octonary-color);
+  border: 2px solid var(--nonary-color);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif; /* Futuristic font */
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid var(--septenary-color); /* Updated to use the new blue variable */
+}
+
+.profile-image {
+  border-radius: 10px;
+  border: 2px solid var(--senary-color); /* Updated to use the new blue variable */
+  margin-right: 15px;
+  width: auto;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-name {
+  font-size: 1.4em;
+  margin: 0;
+  color: var(--tertiary-color); /* Updated to use the new blue variable */
+}
+
+.profile-rank {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1em;
+}
+
+.card-body {
+  padding: 15px;
+  border-bottom: 1px solid var(--septenary-color); /* Updated to use the new blue variable */
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-details p {
+  margin: 8px 0;
+  font-size: 1.1em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card-footer {
+  padding: 15px;
+  text-align: center;
+}
+
+.status-label {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.6);
 }

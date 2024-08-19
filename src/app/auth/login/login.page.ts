@@ -25,9 +25,11 @@ export class LoginPage implements OnInit {
       console.log(res);
       if(res?.user?.uid){
         let uid = res.user.uid;
+        
         this.fireService.getDetails(res.user.uid).subscribe((res: any)=>{
           console.log(uid)
           localStorage.setItem("uid", uid);
+          this.fireService.changedAuth.next(uid);
           this.router.navigateByUrl('')
         },err=>{
           alert(err.message);

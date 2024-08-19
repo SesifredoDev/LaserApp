@@ -10,6 +10,7 @@ import { Platform } from '@ionic/angular';
 import { ForegroundService } from '@capawesome-team/capacitor-android-foreground-service';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { IGame } from '../../models/game-info.model';
+import { Subscription } from 'rxjs';
 
 
 
@@ -22,8 +23,13 @@ export class GameService {
   socketConnection: boolean = false;
   activeGame: IGame = {gameCode: "", isConnected: false};
   bluetoothConnection: boolean = false;
+
+  activeGameSubscription?: Subscription;
+
+  initialize: boolean = false;
   
   user: any;
+  onStartScore: number = 0;
 
   constructor(
     private socketService: WorkerService,
@@ -34,8 +40,8 @@ export class GameService {
     private backgroundMode: BackgroundMode,
   ) {
     // this.setUp();
-    this.initializeBackgroundMode();
     this.addListeners();
+    this.autoPlayerUpdate();
   }
 
   async initializeBackgroundMode() {
@@ -62,9 +68,11 @@ export class GameService {
   }
 
   async setUp() {
-
+    if(!this.initialize){
+      
     // Get User Details
     let uid = localStorage.getItem("uid");
+    console.log(uid)
     this.firebaseService.getDetails(uid).subscribe((data: any) => {
       this.user = data.data();
       console.log(this.user, localStorage.getItem("uid"));
@@ -74,6 +82,13 @@ export class GameService {
         console.log('Reconnecting to game:', gameCode);
         this.socketService.joinGame(gameCode, this.user);
       }
+    })
+
+
+    this.firebaseService.changedAuth.subscribe( ()=>{
+      this.firebaseService.getDetails({uid: localStorage.getItem("uid")}).subscribe((data: any) => {
+        this.user = data.data();
+      })
     })
 
     // Bluetooth Setup
@@ -96,14 +111,19 @@ export class GameService {
 
         console.error('Server not connected. Reconnecting...');
         this.router.navigate(['menu']);
+        
+        this.socketService.socketConnect();
       } else {
         this.router.navigate(['']);
+        if(this.activeGame.isConnected && this.activeGame.gameCode){
+          this.socketService.joinGame(this.activeGame.gameCode, this.user);
+        }
       }
+      this.initialize = true;
     })
 
 
     // Activated Game
-
     this.socketService.activeGame.subscribe(code => {
       console.log('Active game code:', code.gameCode);
       this.activeGame = code;
@@ -119,11 +139,15 @@ export class GameService {
         this.router.navigate(['']);
       }
     })
-
+    
     // Initialize services
-    this.bluetoothService.initialized()
+    this.bluetoothService.initialized();
+    
     this.socketService.socketConnect();
 
+
+
+    }
 
   }
 
@@ -155,6 +179,15 @@ export class GameService {
 
   gotShot(any: any) {
     this.socketService.sendGotShot(any);
+  }
+
+  autoPlayerUpdate(){
+    this.socketService.playerData.subscribe((data)=>{
+      let newTotal = data.changeScore + this.user.totalScore ;
+      this.user.totalScore = newTotal;
+      console.log(this.user.totalScore)
+      this.firebaseService.updateDetails({uid: this.user.uid, totalScore: newTotal});
+    })
   }
 
 

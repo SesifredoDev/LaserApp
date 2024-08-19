@@ -1,9 +1,35 @@
 <ion-content>
   <ion-router-outlet></ion-router-outlet>
-
+  <ion-fab slot="fixed" horizontal="center" vertical="bottom">
+    <ion-fab-button>
+      <ion-icon name="menu"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button  routerLink="" >
+        <ion-icon name="home" size="large"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button routerLink="leaderboard">
+        <ion-icon name="medal" size="large"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button routerLink="map">
+        <ion-icon name="navigate-circle-sharp" size="large"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button [routerLink]="'menu'">
+        <ion-icon name="cog" size="large"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="logout()" [routerLink]="'auth'">
+        <ion-icon name="exit" size="large"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
 <ion-footer>
-  <ion-tab-bar slot="bottom">
+  
+  <!-- <ion-tab-bar slot="bottom">
     <ion-tab-button routerLink="">
       <ion-icon name="Home" ></ion-icon>
       Home
@@ -26,5 +52,5 @@
       logout
     </ion-tab-button>
     
-  </ion-tab-bar>
+  </ion-tab-bar> -->
 </ion-footer>

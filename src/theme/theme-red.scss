@@ -1,0 +1,20 @@
+:root {
+    /* Primary Red Shades */
+    --primary-color: rgba(255, 0, 0, 0.3); /* Light Red */
+    --secondary-color: rgba(255, 0, 0, 0.5); /* Medium Red */
+    --tertiary-color: rgba(255, 0, 0, 0.6); /* Dark Red */
+    --quaternary-color: rgba(255, 0, 0, 0.7); /* Deeper Red */
+  
+    /* Supporting Colors */
+    --quinary-color: rgba(255, 255, 255, 0.1); /* Very Light Red or White (for contrast) */
+    --senary-color: rgba(255, 255, 255, 0.4); /* Lighter Red or White (for borders) */
+    --septenary-color: rgba(200, 0, 0, 0.4); /* Deep Red */
+    --octonary-color: rgba(200, 0, 0, 0.2); /* Lighter Deep Red */
+    --nonary-color: rgba(200, 0, 0, 0.7); /* Strong Deep Red */
+    --denary-color: rgba(200, 0, 0, 0.16); /* Very Dark Red */
+  
+    /* Background Gradient */
+    --background-gradient: linear-gradient(60deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 36%, var(--secondary-color) 40%, rgba(0, 0, 0, 1) 44%, rgba(0, 0, 0, 1) 100%);
+  
+    --text-color: white;
+  }

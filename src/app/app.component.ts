@@ -7,6 +7,7 @@ import { FirebaseService } from './shared/services/firebase.service';
 import { Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { GameService } from './shared/services';
+import { ThemeService } from './shared/services/theme/theme.service';
 
 
 @Component({
@@ -20,11 +21,13 @@ export class AppComponent{
     private gameService: GameService, 
     private platform: Platform,
     private router: Router, 
-    private zone: NgZone) {
+    private zone: NgZone,
+    private themeService: ThemeService
+  ) {
      
     this.platform.ready().then(() => {
       this.initializeApp();
-      
+      this.gameService.initializeBackgroundMode();
       
     });
   }

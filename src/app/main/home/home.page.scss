@@ -25,3 +25,89 @@
 #container a {
   text-decoration: none;
 }
+
+// .div-panel {
+//   --background-color: linear-gradient(145deg, rgba(0, 255, 220, 0.05), rgba(0, 255, 220, 0.1));
+  
+//   --border-color: white;
+//   --border-width: 0.25em;
+//   --edge-size: 0.5em;
+
+//   position: relative;
+//   padding: 5%;
+//   margin-top: 10px;
+//   width: 100%;
+//   background: var(--background-color) ;
+//   padding: 0.5em 1.5em;
+//   border: 2px solid  rgba(0, 255, 220, 0.6);
+//   place-content: center;
+//   box-shadow:
+//       0 0 15px rgba(0, 255, 220, 0.5), 
+//       inset 0 0 15px rgba(0, 255, 220, 0.2);
+//   overflow: hidden;
+//   font-size: small !important;
+// }
+
+
+// .div-panel::before {
+//   content: "";
+//   position: absolute;
+//   top: 10px;
+//   left: 10px;
+//   right: 10px;
+//   bottom: 10px;
+//   border: 2px dashed rgba(0, 255, 220, 0.2);
+//   border-radius: 6px;
+//   pointer-events: none;
+// }
+
+// .div-panel::after {
+//   content: "";
+//   position: absolute;
+//   top: -2px;
+//   left: -2px;
+//   right: -2px;
+//   bottom: -2px;
+//   border: 1px solid rgba(0, 255, 220, 0.4);
+//   border-radius: 8px;
+//   pointer-events: none;
+//   box-shadow: 
+//       0 0 20px rgba(0, 255, 220, 0.3), 
+//       inset 0 0 30px rgba(0, 255, 220, 0.3);
+// }
+
+// .div-panel .glow-lines {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   pointer-events: none;
+//   background: linear-gradient(to right, rgba(0, 255, 220, 0.1), rgba(0, 255, 220, 0.4) 50%, rgba(0, 255, 220, 0.1));
+//   mask-image: linear-gradient(transparent 50%, black 100%);
+//   mix-blend-mode: screen;
+// }
+
+.status-value {
+  font-size: 1.2em;
+  color: #00ff00;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .card-body p{
+    font-size: 0.75em;
+  }
+  .card-body{
+    padding: 5px;
+  }
+}
+
+
+
+ion-list{
+  background: none;
+}
+ion-item{
+  --background: none !important;
+}

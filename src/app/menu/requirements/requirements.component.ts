@@ -67,6 +67,7 @@ export class RequirementsComponent{
   }
 
   cancel(){
+    this.gameService.disconnectFromGame();
     this.modalCtrl.dismiss();
   }
 

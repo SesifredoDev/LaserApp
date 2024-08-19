@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home/home.page';
 import { MapPage } from './map/map.page';
 import { TabControlComponent } from './tab-control/tab-control.component';
+import { gameGaurd } from '../shared/authGaurd/game.gaurd';
 
 const routes: Routes = [
   {
@@ -11,8 +12,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomePage },
-      { path:'map', component: MapPage },
-      { path: 'leaderboard', loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.LeaderboardPageModule) },
+      { path:'map', component: MapPage, canActivate:[gameGaurd] },
+      { path: 'leaderboard', loadChildren: () => import('./leaderboard/leaderboard.module').then(m => m.LeaderboardPageModule), canActivate: [gameGaurd] },
     ]
     },
   

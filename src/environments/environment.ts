@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  socketUrl: "http://192.168.0.54:8080",
+  socketUrl: "http://192.168.8.146:8080",
   firebase: {
     apiKey: "AIzaSyD0q5OLEhsMk6qB67pGTpZ1yC9AkGUlO2E",
     authDomain: "queenlaser-48877.firebaseapp.com",

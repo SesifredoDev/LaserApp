@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title slot="" class="glitched">
       Home
     </ion-title>
     <ion-buttons slot="end">
@@ -12,15 +12,95 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  
+  </ion-refresher> -->
+<!--   
   <ion-button (click)="connectToGame()"><ion-icon name="link-outline" ></ion-icon></ion-button>
   
   <ion-list>
     <ion-item button *ngFor="let item of scanResults" (click)="connectToDevice(item)"><pre>{{item | json}}</pre></ion-item>
   </ion-list>
-  <pre>{{info | json}}</pre >
+  <pre>{{info | json}}</pre > -->
+
+
+    
+    <ion-grid>
+      <ion-row >
+        <ion-col size="12" size-md="8" size-lg="6">
+
+          <ion-card class="cyberpunk-card ">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="8">
+                    <div class="profile-info">
+                      <h3 class="profile-name">{{user?.name}} Update</h3>
+                      <p class="profile-rank loading-text"> Rank:<ion-text color="success" class=""> Elite</ion-text> </p>
+                    </div>
+                  <div class="card-body">
+                    <div class="card-details">
+                      <p class="loading-text">Total Marks: {{user?.totalScore}}</p>
+                      <p class="loading-text">Location: <ion-text color="danger"> CLASSIFIED</ion-text></p>
+                      <p class="loading-text">Occupation: <ion-text color="danger">CLASSIFIED</ion-text> </p>
+                      <!-- Add more details as needed -->
+                    </div>
+                  </div>
+                </ion-col>
+                <ion-col size="4">
+                    
+                    <img [src]="user?.avatar" alt="Profile Image" class="profile-image">
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+              </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+
+
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="gameData?.isConnected">
+        <ion-col  size="12" offset-md="2" offset-lg="2" size-md="10" size-lg="10">
+          <ion-card>
+            <ion-card-header>
+              <ion-title>Active Mission Data</ion-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+
+
+                  <ion-label slot="start">
+                    Mission Name:
+                  </ion-label>
+                  <ion-label slot="end" class="loading-text">{{gameData?.name}}</ion-label>
+                </ion-item>
+
+                  <ion-item>
+                    <ion-label slot="start">
+                      Mission Marks: 
+                    </ion-label>
+                    <ion-label slot="end" class="loading-text">{{playerData?.currentScore}}</ion-label>
+                </ion-item>
+
+                <ion-item *ngIf="user?.name !== playerData?.name">
+                  <ion-label slot="start">
+                    Alias: 
+                  </ion-label>
+                  <ion-label slot="end" class="loading-text">{{playerData?.name}}</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    
+    
 </ion-content>
     

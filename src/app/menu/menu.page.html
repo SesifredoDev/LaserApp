@@ -1,11 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>menu</ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-button> 
         <ion-icon name="bluetooth" slot="start"></ion-icon> Connect Canon
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
   
 </ion-header>
@@ -14,6 +18,13 @@
   <ion-refresher slot="fixed" (ionRefresh)="getInfo()">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
+  <ion-button [routerLink]="['bluetooth']"> 
+    
+    <ion-icon name="bluetooth" slot="start"></ion-icon> Connect Canon
+  </ion-button>
+
+ 
 
 
   <!-- <pre>
@@ -31,6 +42,7 @@
       <p>
         Unable to connect to the server. Please check your connection and try again.
       </p>
+      <ion-button (click)="getInfo()" expand="fill">Check Again</ion-button>
     </ion-card-content>
   </ion-card>
 
@@ -53,7 +65,7 @@
   </ion-card>
 
   <ion-card *ngIf="socketConnection && activeGame.isConnected">
-    <ion-card-header color="primary">
+    <ion-card-header>
       <ion-title>
         Game Information
       </ion-title>
@@ -81,6 +93,49 @@
       </ion-list>
       <ion-button expand="full" (click)="disconnect()">Leave Game</ion-button>
     </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-title>Theme Selector</ion-title>
+    </ion-card-header>
+    <ion-grid>
+      <ion-col>
+        <ion-button (click)="loadTheme('red')"> 
+          <ion-icon name="bluetooth" slot="start"></ion-icon> Red Theme
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="loadTheme('purple')"> 
+    
+          <ion-icon name="bluetooth" slot="start"></ion-icon> Purple Theme
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="loadTheme('cyan')"> 
+    
+          <ion-icon name="bluetooth" slot="start"></ion-icon> Cyan Theme
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="loadTheme('green')"> 
+    
+          <ion-icon name="bluetooth" slot="start"></ion-icon> Cyan Theme
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="loadTheme('silver')"> 
+    
+          <ion-icon name="bluetooth" slot="start"></ion-icon> Cyan Theme
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="loadTheme('gold')"> 
+    
+          <ion-icon name="bluetooth" slot="start"></ion-icon> Cyan Theme
+        </ion-button>
+      </ion-col>
+    </ion-grid>
   </ion-card>
 
 </ion-content>
